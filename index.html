@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kinderhaus Osteresch – Hamburg Bahrenfeld/Flottbek</title>
+  <meta name="description" content="Kinderhaus Osteresch – Kindertagesstätte in Hamburg Bahrenfeld/Flottbek. Krippe und Elementargruppe. Anmeldung, Konzept und Kontakt.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Barlow+Condensed:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ─────────────────────────────────────────────
+       DIRECTION CONTRACT
+       THESIS: The 1928 Doppelhaus at Osteresch 20 has held children for 86 years straight.
+       The floor plan is the proof. Refuses: the warm cream + handwritten script Kita default
+       and the stock-photo smiling-family circle.
+       OWN-WORLD: Prussian blueprint blue (#162038) ground. Linen (#f0ede4) for all line work
+       and type. Gold (#c8912a) for the single live accent. Blueprint grid as barely-visible
+       texture. Jost for headings and labels; Barlow for body. Three-register page structure:
+       sky (nav + philosophy) / house (building + rooms) / garden (team + contact).
+       Raises: Festival → floor plan is the skeleton, all nav anchored to it.
+       Datamatics → committed grid rhythm throughout. City nocturne → three-register structure.
+       STORY: A parent arrives, sees the precise architectural drawing of the actual house, reads
+       three philosophy quotes, understands the pedagogy, then meets the team and books a visit.
+       FIRST VIEWPORT: Full-width prussian blue. SVG floor plan draws itself in (stroke-dash
+       animation, 2s). Title left-anchored in Jost 700. Gold accent on CTA and key data.
+       FORM: German Bauzeichnung / architectural survey. Candidate 6. Seed key 6eb20fc7.
+       FINISH: unreviewed and undocumented is unfinished; this build ends with the finish
+       review, the verdict, and DESIGN.md.
+    ─────────────────────────────────────────────── */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deep:        #162038;
+      --deep-2:      #1b2844;
+      --deep-3:      #243460;
+      --linen:       #f0ede4;
+      --linen-dim:   #8a9ab8;
+      --linen-faint: rgba(240,237,228,0.55);
+      --gold:        #c8912a;
+      --gold-bright: #e8b24a;
+      --grid:        rgba(240,237,228,0.055);
+      --rule:        rgba(240,237,228,0.18);
+
+      --font-head:  'Jost', 'Futura', 'Century Gothic', sans-serif;
+      --font-cond:  'Barlow Condensed', 'Jost', sans-serif;
+      --font-body:  'Barlow', system-ui, sans-serif;
+
+      --space-xs: 0.5rem;
+      --space-s:  1rem;
+      --space-m:  2rem;
+      --space-l:  4rem;
+      --space-xl: 7rem;
+
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--linen-dim) var(--deep);
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--deep); }
+    ::-webkit-scrollbar-thumb { background: var(--linen-dim); border-radius: 3px; }
+
+    ::selection { background: var(--gold); color: var(--deep); }
+
+    body {
+      background: var(--deep);
+      color: var(--linen);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Blueprint grid texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    * { position: relative; z-index: 1; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background: rgba(22, 32, 56, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--linen);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-cond);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--linen-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--linen); outline: none; }
+
+    .nav-cta {
+      font-family: var(--font-cond);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--deep) !important;
+      background: var(--gold);
+      padding: 0.45rem 1.1rem;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-bright); }
+
+    .nav-burger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-burger span { display: block; width: 22px; height: 1.5px; background: var(--linen); margin: 5px 0; transition: 0.2s; }
+
+    /* ── HERO ── */
+    #start {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      align-items: center;
+      gap: 0;
+      padding: 7rem 2.5rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-text { padding-right: 3rem; }
+
+    .hero-label {
+      font-family: var(--font-cond);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h1 {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--linen);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--linen-faint);
+      max-width: 38ch;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero-meta-row {
+      font-family: var(--font-cond);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: var(--linen-dim);
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .hero-meta-row::before {
+      content: '';
+      display: inline-block;
+      width: 4px; height: 4px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-cond);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--deep);
+      background: var(--gold);
+      padding: 0.85rem 2rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s var(--ease-out-expo);
+    }
+    .btn-primary svg { width: 14px; height: 14px; stroke: currentColor; }
+    .btn-primary:hover { background: var(--gold-bright); transform: translateX(4px); }
+    .btn-primary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-cond);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--linen-dim);
+      background: none;
+      border: 1px solid var(--rule);
+      padding: 0.85rem 2rem;
+      text-decoration: none;
+      margin-left: 1rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--linen-dim); color: var(--linen); }
+
+    /* ── FLOOR PLAN SVG ── */
+    .hero-plan {
+      position: relative;
+    }
+
+    .plan-label {
+      font-family: var(--font-cond);
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--linen-dim);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .plan-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .floor-plan {
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      display: block;
+    }
+
+    /* SVG drawing animation */
+    .plan-path {
+      stroke: var(--linen);
+      fill: none;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+    }
+    .plan-path-outer {
+      stroke-width: 5;
+      stroke-dasharray: 3000;
+      stroke-dashoffset: 3000;
+      animation: drawPath 2.4s var(--ease-out-expo) 0.3s forwards;
+    }
+    .plan-path-inner {
+      stroke-width: 3;
+      stroke-dasharray: 2000;
+      stroke-dashoffset: 2000;
+      animation: drawPath 2s var(--ease-out-expo) 0.9s forwards;
+    }
+    .plan-path-detail {
+      stroke-width: 1.5;
+      stroke: var(--linen-dim);
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawPath 1.6s var(--ease-out-expo) 1.5s forwards;
+    }
+    .plan-path-door {
+      stroke-width: 1;
+      stroke: var(--linen-dim);
+      fill: none;
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      animation: drawPath 0.8s var(--ease-out-expo) 2s forwards;
+    }
+
+    @keyframes drawPath {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .plan-text {
+      font-family: var(--font-cond);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      fill: var(--linen-dim);
+      opacity: 0;
+      animation: fadeText 0.6s ease 2.4s forwards;
+    }
+    .plan-text-gold { fill: var(--gold); }
+    .plan-area-fill {
+      fill: rgba(200, 145, 42, 0.06);
+      stroke: none;
+      opacity: 0;
+      animation: fadeText 1s ease 2.2s forwards;
+    }
+    @keyframes fadeText {
+      to { opacity: 1; }
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: var(--space-xl) 2.5rem; }
+
+    .section-label {
+      font-family: var(--font-cond);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 1.5rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h2 {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--linen);
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+      color: var(--linen);
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--linen-faint);
+      max-width: 65ch;
+    }
+
+    /* ── RULE ── */
+    .rule {
+      width: 100%;
+      height: 1px;
+      background: var(--rule);
+      margin: 0;
+    }
+
+    /* ── PHILOSOPHY ── */
+    #philosophie {
+      background: var(--deep-2);
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .philosophy-header {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+      margin-bottom: 5rem;
+    }
+
+    .philosophy-intro p {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--linen-faint);
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .philosophy-quote {
+      padding: 2.5rem;
+      border-bottom: 1px solid var(--rule);
+      border-right: 1px solid var(--rule);
+    }
+    .philosophy-quote:nth-child(2n) { border-right: none; }
+
+    .quote-text {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--linen);
+      margin-bottom: 1.25rem;
+      max-width: none;
+    }
+    .quote-text::before { content: '„'; color: var(--gold); }
+    .quote-text::after  { content: '"'; color: var(--gold); }
+
+    .quote-author {
+      font-family: var(--font-cond);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--linen-dim);
+    }
+
+    /* Big featured quote */
+    .quote-featured {
+      grid-column: 1 / -1;
+      padding: 3.5rem 2.5rem;
+      border-bottom: 1px solid var(--rule);
+      border-right: none;
+      background: rgba(200,145,42,0.04);
+    }
+    .quote-featured .quote-text {
+      font-size: clamp(1.3rem, 2vw, 1.7rem);
+      max-width: 60ch;
+    }
+
+    /* ── DAS HAUS ── */
+    #das-haus {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .haus-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      border-left: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+
+    .haus-stat {
+      padding: 1.75rem 1.5rem;
+      border-bottom: 1px solid var(--rule);
+      border-right: 1px solid var(--rule);
+    }
+
+    .stat-number {
+      font-family: var(--font-head);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-family: var(--font-cond);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--linen-dim);
+    }
+
+    .haus-oeffnungszeiten {
+      margin-top: 3rem;
+    }
+
+    .oeffnung-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--rule);
+      font-family: var(--font-cond);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      color: var(--linen-faint);
+    }
+    .oeffnung-row strong {
+      color: var(--linen);
+      font-weight: 500;
+    }
+
+    /* ── GRUPPEN ── */
+    #gruppen { background: var(--deep-2); border-top: 1px solid var(--rule); }
+
+    .gruppen-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+
+    .gruppe {
+      padding: 3rem;
+      border-right: 1px solid var(--rule);
+    }
+    .gruppe:last-child { border-right: none; }
+
+    .gruppe-name {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+      color: var(--linen);
+      margin-bottom: 0.25rem;
+    }
+
+    .gruppe-subtitle {
+      font-family: var(--font-cond);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .gruppe-detail {
+      font-family: var(--font-cond);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--linen-dim);
+      margin-bottom: 1.5rem;
+    }
+
+    .gruppe-raeume {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .raum-tag {
+      font-family: var(--font-cond);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--linen-dim);
+      border: 1px solid var(--rule);
+      padding: 0.4rem 0.75rem;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    /* ── RAEUME ── */
+    #raeume { border-top: 1px solid var(--rule); }
+
+    .raeume-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      border-left: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+
+    .raum {
+      padding: 2rem;
+      border-bottom: 1px solid var(--rule);
+      border-right: 1px solid var(--rule);
+    }
+
+    .raum-icon {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 1rem;
+      stroke: var(--gold);
+    }
+
+    .raum h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .raum p {
+      font-size: 0.9rem;
+      max-width: none;
+      color: var(--linen-faint);
+    }
+
+    /* ── EINGEWÖHNUNG ── */
+    #eingewoehnung { background: var(--deep-2); border-top: 1px solid var(--rule); }
+
+    .eingewoehnung-phases {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+
+    .phase {
+      padding: 2rem;
+      border-right: 1px solid var(--rule);
+    }
+    .phase:last-child { border-right: none; }
+
+    .phase-number {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 3rem;
+      color: rgba(200,145,42,0.2);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .phase h3 { font-size: 0.95rem; margin-bottom: 0.75rem; }
+    .phase p { font-size: 0.88rem; max-width: none; }
+
+    /* ── TEAM ── */
+    #team { border-top: 1px solid var(--rule); }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      border-left: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+
+    .team-member {
+      padding: 1.75rem;
+      border-bottom: 1px solid var(--rule);
+      border-right: 1px solid var(--rule);
+    }
+
+    .member-initial {
+      width: 48px;
+      height: 48px;
+      background: var(--deep-3);
+      border: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .member-name {
+      font-family: var(--font-head);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--linen);
+      margin-bottom: 0.25rem;
+    }
+
+    .member-role {
+      font-family: var(--font-cond);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--linen-dim);
+    }
+
+    /* ── GESCHICHTE ── */
+    #geschichte { background: var(--deep-2); border-top: 1px solid var(--rule); }
+
+    .geschichte-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 5rem;
+      margin-top: 3rem;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .timeline-year {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--gold);
+      padding-top: 0.15rem;
+    }
+
+    .timeline-text {
+      font-size: 0.9rem;
+      color: var(--linen-faint);
+      max-width: none;
+      font-weight: 300;
+    }
+
+    /* ── KONTAKT ── */
+    #kontakt { border-top: 1px solid var(--rule); }
+
+    .kontakt-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      margin-top: 3rem;
+    }
+
+    .kontakt-info { }
+
+    .kontakt-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .kontakt-row {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .kontakt-row-label {
+      font-family: var(--font-cond);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--linen-dim);
+      min-width: 80px;
+      padding-top: 0.15rem;
+    }
+
+    .kontakt-row-value {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--linen);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .kontakt-row-value a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .kontakt-row-value a:hover { text-decoration: underline; }
+
+    /* ── FORM ── */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-family: var(--font-cond);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--linen-dim);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--deep-3);
+      border: 1px solid var(--rule);
+      color: var(--linen);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 300;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      appearance: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--linen-dim); opacity: 0.6; }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.6;
+    }
+    .form-group input:focus-visible,
+    .form-group textarea:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: -2px;
+    }
+
+    .form-checkbox {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+    .form-checkbox input { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; accent-color: var(--gold); }
+    .form-checkbox span {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: var(--linen-dim);
+      line-height: 1.5;
+    }
+    .form-checkbox a { color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--deep-2);
+      border-top: 1px solid var(--rule);
+      padding: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-left {
+      font-family: var(--font-cond);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--linen-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-family: var(--font-cond);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--linen-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--linen); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      #start {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding-top: 6rem;
+      }
+      .hero-text { padding-right: 0; }
+      .philosophy-header { grid-template-columns: 1fr; gap: 2rem; }
+      .philosophy-grid { grid-template-columns: 1fr; }
+      .philosophy-quote { border-right: none; }
+      .quote-featured { grid-column: 1; }
+      #das-haus { grid-template-columns: 1fr; gap: 2rem; }
+      .gruppen-grid { grid-template-columns: 1fr; }
+      .gruppe { border-right: none; border-bottom: 1px solid var(--rule); }
+      .raeume-grid { grid-template-columns: 1fr 1fr; }
+      .eingewoehnung-phases { grid-template-columns: 1fr 1fr; }
+      .phase { border-right: 1px solid var(--rule); }
+      .phase:nth-child(2n) { border-right: none; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .geschichte-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .kontakt-layout { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 640px) {
+      section { padding: 4rem 1.25rem; }
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        inset: 60px 0 0 0;
+        background: var(--deep-2);
+        padding: 2rem;
+        gap: 1.5rem;
+        z-index: 99;
+        border-top: 1px solid var(--rule);
+      }
+      .nav-links.open a { font-size: 1rem; }
+      .nav-cta { display: none; }
+      .nav-burger { display: block; }
+      .form-row { grid-template-columns: 1fr; }
+      .raeume-grid { grid-template-columns: 1fr; }
+      .eingewoehnung-phases { grid-template-columns: 1fr; }
+      .phase { border-right: none; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .haus-stats { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .plan-path-outer, .plan-path-inner, .plan-path-detail, .plan-path-door {
+        animation: none;
+        stroke-dashoffset: 0;
+      }
+      .plan-text, .plan-area-fill {
+        animation: none;
+        opacity: 1;
+      }
+      .reveal { transition: none; opacity: 1; transform: none; }
+      .btn-primary:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Direction contract: see opening CSS comment -->
+
+<nav id="nav">
+  <a class="nav-logo" href="#start">Kinderhaus <span>Osteresch</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#philosophie">Konzept</a></li>
+    <li><a href="#gruppen">Gruppen</a></li>
+    <li><a href="#raeume">Räume</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+    <li><a href="#kontakt" class="nav-cta">Anmeldung</a></li>
+  </ul>
+  <button class="nav-burger" id="navBurger" aria-label="Navigation öffnen">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="start">
+  <div class="hero-text">
+    <p class="hero-label">Hamburg Bahrenfeld · Flottbek</p>
+    <h1>Kinderhaus<br>Osteresch</h1>
+    <p class="hero-sub">
+      Krippe und Elementargruppe in einem Doppelhaus von 1928 —
+      mitten in der Steenkampsiedlung. Pädagogisch engagiert, persönlich, bio.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-row">38 Kinder · Krippe &amp; Elementar</div>
+      <div class="hero-meta-row">Mo – Fr &thinsp;7:45 – 16:30 Uhr</div>
+      <div class="hero-meta-row">Osteresch 20 · 22607 Hamburg</div>
+      <div class="hero-meta-row">Träger: Verein seit 1961</div>
+    </div>
+    <div>
+      <a href="#kontakt" class="btn-primary">
+        Anmeldung anfragen
+        <svg viewBox="0 0 14 14" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M1 7h12M8 3l5 4-5 4"/>
+        </svg>
+      </a>
+      <a href="#philosophie" class="btn-ghost">Konzept</a>
+    </div>
+  </div>
+
+  <div class="hero-plan">
+    <p class="plan-label">Erdgeschoss · Maßstab ca. 1:100</p>
+
+    <svg class="floor-plan" viewBox="0 0 760 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grundriss Erdgeschoss Kinderhaus Osteresch">
+
+      <!-- Warm tinted fill areas for rooms before lines draw -->
+      <rect class="plan-area-fill" x="44" y="44" width="258" height="152" rx="0"/>
+      <rect class="plan-area-fill" x="302" y="44" width="156" height="152" rx="0" style="animation-delay:2.3s"/>
+      <rect class="plan-area-fill" x="458" y="44" width="258" height="152" rx="0" style="animation-delay:2.35s"/>
+
+      <!-- OUTER BUILDING SHELL -->
+      <path class="plan-path plan-path-outer"
+        d="M42,42 H716 V298 H42 Z"/>
+
+      <!-- DOPPELHAUS CENTRE WALL -->
+      <line class="plan-path plan-path-inner" x1="379" y1="42" x2="379" y2="298"/>
+
+      <!-- LEFT HALF walls (ZWERGE / Krippe) -->
+      <!-- Horizontal split: upper row -->
+      <line class="plan-path plan-path-inner" x1="42" y1="196" x2="379" y2="196"/>
+      <!-- Vertical: Bewegungsraum | Bauraum split -->
+      <line class="plan-path plan-path-inner" x1="242" y1="42" x2="242" y2="196"/>
+
+      <!-- RIGHT HALF walls (Shared area) -->
+      <!-- Horizontal: Garderobe / Restaurant split -->
+      <line class="plan-path plan-path-inner" x1="379" y1="168" x2="716" y2="168"/>
+      <!-- Vertical: Garderobe | Treppenhaus | Küche -->
+      <line class="plan-path plan-path-inner" x1="556" y1="42" x2="556" y2="168"/>
+      <line class="plan-path plan-path-inner" x1="638" y1="42" x2="638" y2="168"/>
+
+      <!-- Partial wall: Garderobe inner partition -->
+      <line class="plan-path plan-path-inner" x1="379" y1="110" x2="480" y2="110"/>
+
+      <!-- DOORS (arc symbols) -->
+      <!-- Bewegungsraum door -->
+      <path class="plan-path-door" d="M102,196 A36,36 0 0,0 138,160"/>
+      <line class="plan-path-door" x1="102" y1="196" x2="102" y2="160" stroke-width="1.5" stroke="var(--linen-dim)"/>
+
+      <!-- Bauraum door -->
+      <path class="plan-path-door" d="M280,196 A30,30 0 0,1 250,170" style="animation-delay:2.1s"/>
+      <line class="plan-path-door" x1="280" y1="196" x2="280" y2="170" stroke-width="1.5" stroke="var(--linen-dim)" style="animation-delay:2.1s"/>
+
+      <!-- Atelier Zwerge door -->
+      <path class="plan-path-door" d="M200,298 A36,36 0 0,0 236,262" style="animation-delay:2.15s"/>
+      <line class="plan-path-door" x1="200" y1="298" x2="200" y2="262" stroke-width="1.5" stroke="var(--linen-dim)" style="animation-delay:2.15s"/>
+
+      <!-- Restaurant door -->
+      <path class="plan-path-door" d="M500,298 A36,36 0 0,1 536,262" style="animation-delay:2.2s"/>
+      <line class="plan-path-door" x1="500" y1="298" x2="500" y2="262" stroke-width="1.5" stroke="var(--linen-dim)" style="animation-delay:2.2s"/>
+
+      <!-- WINDOWS – shown as double lines on exterior walls -->
+      <!-- Left wall windows -->
+      <line class="plan-path plan-path-detail" x1="42" y1="80" x2="42" y2="140"/>
+      <line class="plan-path plan-path-detail" x1="36" y1="80" x2="36" y2="140"/>
+      <line class="plan-path plan-path-detail" x1="42" y1="220" x2="42" y2="270"/>
+      <line class="plan-path plan-path-detail" x1="36" y1="220" x2="36" y2="270"/>
+
+      <!-- Top wall windows -->
+      <line class="plan-path plan-path-detail" x1="80" y1="42" x2="160" y2="42"/>
+      <line class="plan-path plan-path-detail" x1="80" y1="36" x2="160" y2="36"/>
+      <line class="plan-path plan-path-detail" x1="270" y1="42" x2="360" y2="42"/>
+      <line class="plan-path plan-path-detail" x1="270" y1="36" x2="360" y2="36"/>
+      <line class="plan-path plan-path-detail" x1="420" y1="42" x2="530" y2="42"/>
+      <line class="plan-path plan-path-detail" x1="420" y1="36" x2="530" y2="36"/>
+      <line class="plan-path plan-path-detail" x1="650" y1="42" x2="710" y2="42"/>
+      <line class="plan-path plan-path-detail" x1="650" y1="36" x2="710" y2="36"/>
+
+      <!-- Right wall windows -->
+      <line class="plan-path plan-path-detail" x1="716" y1="70" x2="716" y2="140"/>
+      <line class="plan-path plan-path-detail" x1="722" y1="70" x2="722" y2="140"/>
+      <line class="plan-path plan-path-detail" x1="716" y1="200" x2="716" y2="270"/>
+      <line class="plan-path plan-path-detail" x1="722" y1="200" x2="722" y2="270"/>
+
+      <!-- Bottom wall windows -->
+      <line class="plan-path plan-path-detail" x1="80" y1="298" x2="170" y2="298"/>
+      <line class="plan-path plan-path-detail" x1="80" y1="304" x2="170" y2="304"/>
+      <line class="plan-path plan-path-detail" x1="500" y1="298" x2="620" y2="298"/>
+      <line class="plan-path plan-path-detail" x1="500" y1="304" x2="620" y2="304"/>
+
+      <!-- STAIRCASE symbol -->
+      <line class="plan-path plan-path-detail" x1="560" y1="50" x2="632" y2="50"/>
+      <line class="plan-path plan-path-detail" x1="560" y1="62" x2="632" y2="62"/>
+      <line class="plan-path plan-path-detail" x1="560" y1="74" x2="632" y2="74"/>
+      <line class="plan-path plan-path-detail" x1="560" y1="86" x2="632" y2="86"/>
+      <line class="plan-path plan-path-detail" x1="560" y1="98" x2="632" y2="98"/>
+      <line class="plan-path plan-path-detail" x1="560" y1="110" x2="632" y2="110"/>
+      <line class="plan-path plan-path-detail" x1="560" y1="122" x2="632" y2="122"/>
+      <line class="plan-path plan-path-detail" x1="560" y1="134" x2="632" y2="134"/>
+      <line class="plan-path plan-path-detail" x1="560" y1="146" x2="632" y2="146"/>
+      <line class="plan-path plan-path-detail" x1="560" y1="158" x2="632" y2="158"/>
+
+      <!-- GARDEN area (below building) -->
+      <rect class="plan-path plan-path-detail" x="42" y="316" width="674" height="130" rx="0"
+        stroke-dasharray="8 5"/>
+
+      <!-- Garden elements: tree circles -->
+      <circle class="plan-path plan-path-detail" cx="120" cy="370" r="20"/>
+      <circle class="plan-path plan-path-detail" cx="120" cy="370" r="12" style="animation-delay:2.8s"/>
+      <circle class="plan-path plan-path-detail" cx="200" cy="395" r="16"/>
+      <circle class="plan-path plan-path-detail" cx="620" cy="360" r="18"/>
+      <circle class="plan-path plan-path-detail" cx="680" cy="400" r="14"/>
+
+      <!-- Sandkasten symbol -->
+      <rect class="plan-path plan-path-detail" x="300" y="345" width="80" height="60"/>
+      <line class="plan-path plan-path-detail" x1="300" y1="345" x2="380" y2="405"/>
+      <line class="plan-path plan-path-detail" x1="380" y1="345" x2="300" y2="405"/>
+
+      <!-- Schaukel symbol -->
+      <line class="plan-path plan-path-detail" x1="440" y1="330" x2="440" y2="420"/>
+      <line class="plan-path plan-path-detail" x1="500" y1="330" x2="500" y2="420"/>
+      <line class="plan-path plan-path-detail" x1="430" y1="330" x2="510" y2="330"/>
+      <rect class="plan-path plan-path-detail" x="447" y="370" width="26" height="8"/>
+
+      <!-- ROOM LABELS -->
+      <!-- Left half labels -->
+      <text class="plan-text" x="142" y="115">Bewegungsraum</text>
+      <text class="plan-text" x="284" y="115">Bauraum</text>
+      <text class="plan-text plan-text-gold" x="64" y="90" font-weight="600" font-size="8">Zwerge</text>
+
+      <text class="plan-text" x="80" y="255">Atelier Zwerge</text>
+
+      <!-- Right half labels -->
+      <text class="plan-text plan-text-gold" x="400" y="62" font-weight="600" font-size="8">Gemeinsam</text>
+      <text class="plan-text" x="400" y="148">Garderobe</text>
+      <text class="plan-text" x="566" y="100">Treppen</text>
+      <text class="plan-text" x="650" y="100">Küche</text>
+      <text class="plan-text" x="520" y="240">Restaurant</text>
+
+      <!-- Garden label -->
+      <text class="plan-text" x="340" y="445" text-anchor="middle" font-size="11" letter-spacing="0.2em">GARTEN</text>
+      <text class="plan-text" x="260" y="384">Sandkasten</text>
+      <text class="plan-text" x="445" y="445">Schaukeln</text>
+
+      <!-- OG note -->
+      <text class="plan-text" x="560" y="90" text-anchor="middle" font-size="7">OG →</text>
+
+      <!-- TITLE BLOCK (bottom left, like a proper blueprint) -->
+      <rect class="plan-path plan-path-detail" x="42" y="318" width="220" height="0" style="animation: none; opacity:0"/>
+      <text class="plan-text" x="46" y="470" font-size="7.5" letter-spacing="0.08em">KINDERHAUS OSTERESCH · OSTERESCH 20 · 22607 HH</text>
+      <text class="plan-text" x="46" y="480" font-size="6" letter-spacing="0.06em" style="animation-delay:2.6s">EG · ERB. 1928 · DOPPELHAUS</text>
+
+      <!-- NORTH ARROW -->
+      <g transform="translate(700, 440)" opacity="0" style="animation: fadeText 0.8s ease 2.8s forwards">
+        <line x1="0" y1="20" x2="0" y2="-5" stroke="var(--linen-dim)" stroke-width="1.5"/>
+        <polygon points="0,-20 -5,-5 5,-5" fill="var(--gold)" opacity="0.8"/>
+        <text font-family="'Barlow Condensed', sans-serif" font-size="8" fill="var(--linen-dim)" letter-spacing="0.1em" x="-4" y="32">N</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ── PHILOSOPHIE ── -->
+<section id="philosophie">
+  <div class="reveal">
+    <p class="section-label">Unser Bild vom Kind</p>
+    <div class="philosophy-header">
+      <div>
+        <h2>Was uns antreibt</h2>
+      </div>
+      <div class="philosophy-intro">
+        <p>
+          Wir wissen, dass Kinder die notwendigen Kompetenzen mitbringen,
+          um ihre eigene Entwicklung selbst voranzutreiben — dass sie neugierig
+          und bildungshungrig sind und die Welt verstehen wollen.
+          Unsere Aufgabe ist nicht, zu formen, sondern Raum zu schaffen.
+        </p>
+      </div>
+    </div>
+
+    <div class="philosophy-grid">
+      <div class="philosophy-quote quote-featured">
+        <p class="quote-text">
+          Nicht Probleme kompensieren, sondern Entwicklung aktivieren.
+        </p>
+        <p class="quote-author">Gerald Hüter · Neurobiologe</p>
+      </div>
+
+      <div class="philosophy-quote">
+        <p class="quote-text">
+          Die Aufgabe der Umgebung ist nicht, das Kind zu formen,
+          sondern ihm zu erlauben, sich zu offenbaren.
+        </p>
+        <p class="quote-author">Maria Montessori</p>
+      </div>
+
+      <div class="philosophy-quote">
+        <p class="quote-text">
+          Das Spiel ist die höchste Form der Forschung.
+        </p>
+        <p class="quote-author">Albert Einstein</p>
+      </div>
+
+      <div class="philosophy-quote" style="grid-column: 1 / -1; border-right: none;">
+        <p class="quote-text">
+          Das Gras wächst nicht schneller, wenn man daran zieht.
+        </p>
+        <p class="quote-author">Afrikanisches Sprichwort</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DAS HAUS ── -->
+<section id="das-haus" class="reveal">
+  <div>
+    <p class="section-label">Das Kinderhaus</p>
+    <h2>Raum für<br>38 Kinder</h2>
+    <p>
+      Unser Doppelhaus von 1928 steht in einer ruhigen Seitenstraße der
+      Steenkampsiedlung in Bahrenfeld/Flottbek — mit großem Garten, eigener Küche
+      und zwei Gruppen, die gemeinsam den Früh- und Spätdienst verbringen.
+    </p>
+    <p style="margin-top: 1rem;">
+      Der Verein zur Förderung von Kleinkindererziehung e.V. trägt das Haus
+      seit dem 1. Oktober 1993. Unser Dachverband ist SOAL.
+    </p>
+
+    <div class="haus-stats">
+      <div class="haus-stat">
+        <div class="stat-number">38</div>
+        <div class="stat-label">Kinder gesamt</div>
+      </div>
+      <div class="haus-stat">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Krippenplätze</div>
+      </div>
+      <div class="haus-stat">
+        <div class="stat-number">26</div>
+        <div class="stat-label">Elementarplätze</div>
+      </div>
+      <div class="haus-stat">
+        <div class="stat-number">1928</div>
+        <div class="stat-label">Baujahr Haus</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="section-label">Öffnungszeiten</p>
+    <h2>Täglich geöffnet</h2>
+    <p>
+      Tages­betreuung von Montag bis Freitag.
+      Wir sind geschlossen in den letzten drei vollen Wochen
+      der Hamburger Sommerferien und zwischen Weihnachten und Neujahr.
+    </p>
+
+    <div class="haus-oeffnungszeiten">
+      <div class="oeffnung-row"><span>Montag – Freitag</span><strong>7:45 – 16:30 Uhr</strong></div>
+      <div class="oeffnung-row"><span>Frühgruppe ab</span><strong>7:45 Uhr</strong></div>
+      <div class="oeffnung-row"><span>Spätgruppe bis</span><strong>16:30 Uhr</strong></div>
+      <div class="oeffnung-row"><span>Sommerferien</span><strong>Letzte 3 volle Wochen</strong></div>
+      <div class="oeffnung-row"><span>Jahresende</span><strong>Weihnachten – Neujahr</strong></div>
+      <div class="oeffnung-row"><span>Zusätzlich</span><strong>4 weitere Schließtage</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GRUPPEN ── -->
+<section id="gruppen">
+  <div class="reveal">
+    <p class="section-label">Die Gruppen</p>
+    <h2>Zwei Welten unter einem Dach</h2>
+
+    <div class="gruppen-grid">
+      <div class="gruppe">
+        <div class="gruppe-name">Zwerge</div>
+        <div class="gruppe-subtitle">Krippengruppe</div>
+        <div class="gruppe-detail">1 – 3 Jahre · 12 Kinder · Erdgeschoss</div>
+        <p>
+          Die Zwerge erkunden das Haus von den Räumen im Erdgeschoss aus.
+          Drei Fachräume — Atelier, Bauraum und Bewegungsraum — sind eigens
+          für die Bedürfnisse der Jüngsten gestaltet.
+          Sinnliche Erfahrung steht im Vordergrund: Farbe, Ton, Bewegung, Baustein.
+        </p>
+        <div class="gruppe-raeume">
+          <span class="raum-tag">Atelier</span>
+          <span class="raum-tag">Bauraum</span>
+          <span class="raum-tag">Bewegungsraum</span>
+        </div>
+      </div>
+
+      <div class="gruppe">
+        <div class="gruppe-name">Spatzen</div>
+        <div class="gruppe-subtitle">Elementargruppe</div>
+        <div class="gruppe-detail">3 – 6 Jahre · 26 Kinder · EG + OG</div>
+        <p>
+          Die Spatzen haben Erdgeschoss und Obergeschoss zur Verfügung —
+          vier Fachräume für Bewegung, Kunst, Konstruktion und Rollenspiel.
+          Hier beginnt das forschende Spiel, das Einstein als höchste Form der
+          Erkenntnis bezeichnete.
+        </p>
+        <div class="gruppe-raeume">
+          <span class="raum-tag">Atelier</span>
+          <span class="raum-tag">Bauraum</span>
+          <span class="raum-tag">Bewegungsraum</span>
+          <span class="raum-tag">Rollenspielraum</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── RÄUME ── -->
+<section id="raeume">
+  <div class="reveal">
+    <p class="section-label">Räume</p>
+    <h2>Sieben Fachräume,<br>ein großer Garten</h2>
+
+    <div class="raeume-grid">
+      <div class="raum">
+        <svg class="raum-icon" viewBox="0 0 28 28" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 4 C8 4 4 9 4 14 S8 24 14 24 S24 19 24 14 S20 4 14 4"/>
+          <path d="M14 8 v6 l4 2"/>
+        </svg>
+        <h3>Bewegungsraum</h3>
+        <p>Hängematten, Schwingseile, Kletterwand, Schaumstoffelemente und „Zauberkästen" — nach eigenem Tempo und Entwicklungsstand.</p>
+      </div>
+
+      <div class="raum">
+        <svg class="raum-icon" viewBox="0 0 28 28" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="5" y="14" width="6" height="9"/>
+          <rect x="12" y="10" width="6" height="13"/>
+          <rect x="19" y="6" width="4" height="17"/>
+        </svg>
+        <h3>Bauraum</h3>
+        <p>Bausteine, Muscheln, Steine, Fahrzeuge und Rollenspielmaterialien. Statik erleben. Konstruieren, abreißen, neu beginnen.</p>
+      </div>
+
+      <div class="raum">
+        <svg class="raum-icon" viewBox="0 0 28 28" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 20 Q12 8 16 18 Q18 24 22 12"/>
+          <circle cx="8" cy="22" r="2"/>
+        </svg>
+        <h3>Atelier</h3>
+        <p>Von Kastanien bis Linsen, von Wasser und Farbe bis Salzteig und Ton. Erfahrungen statt Erwartungen — die Tätigkeit selbst zählt.</p>
+      </div>
+
+      <div class="raum">
+        <svg class="raum-icon" viewBox="0 0 28 28" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 18 H24 M6 18 V10 H22 V18"/>
+          <path d="M10 18 V14 H18 V18"/>
+        </svg>
+        <h3>Restaurant</h3>
+        <p>Täglich frisch und bio gekocht von Amat. Das Essen als sinnliche Erfahrung — Duft, Farbe, Konsistenz. Das Auge isst mit.</p>
+      </div>
+
+      <div class="raum">
+        <svg class="raum-icon" viewBox="0 0 28 28" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="14" cy="10" r="5"/>
+          <path d="M4 24 C4 18 24 18 24 24"/>
+        </svg>
+        <h3>Garderobe</h3>
+        <p>Gemeinsamer Ankerpunkt für beide Gruppen. Morgens Übergang, nachmittags Aufbruch. Täglich ein kurzes Zwischen-Innen-und-Außen.</p>
+      </div>
+
+      <div class="raum">
+        <svg class="raum-icon" viewBox="0 0 28 28" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 22 V10 L14 6 L22 10 V22"/>
+          <rect x="11" y="16" width="6" height="6"/>
+        </svg>
+        <h3>Garten</h3>
+        <p>Spielhäuser, Sandkiste, Matschanlage, Schaukeln, Klettermöglichkeiten, Röhrenrutsche, Sträucher und Obstbäume. Rohre, Bretter, Holzklötze.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EINGEWÖHNUNG ── -->
+<section id="eingewoehnung">
+  <div class="reveal">
+    <p class="section-label">Eingewöhnung</p>
+    <h2>Das Kind bestimmt<br>das Tempo</h2>
+    <p>
+      Eingewöhnung nach dem Berliner Modell — individuell, behutsam,
+      im Rhythmus des Kindes. Die Bindungsperson ist in jeder Phase dabei,
+      bis das Kind bereit ist.
+    </p>
+
+    <div class="eingewoehnung-phases">
+      <div class="phase">
+        <div class="phase-number">01</div>
+        <h3>Ankommen</h3>
+        <p>Kind und Bindungsperson lernen das Haus kennen. Die Bezugsfachkraft empfängt, beobachtet und nimmt ersten Kontakt auf. Täglich 1 Stunde, bis zu 5 Tage.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-number">02</div>
+        <h3>In Kontakt gehen</h3>
+        <p>Die Fachkraft geht stärker auf das Kind zu und lädt es ein. Die Bindungsperson bleibt im Raum, hält sich aber zurück. Täglich 1 Stunde, 2–5 Tage.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-number">03</div>
+        <h3>Erste Trennung</h3>
+        <p>Erst wenn das Kind die Umgebung selbstständig erkundet und guten Kontakt zur Fachkraft hat, gibt es den ersten Abschied — kurz, klar, mit Rückkehr nach 10 Minuten.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-number">04</div>
+        <h3>Ankommen im Alltag</h3>
+        <p>Die Trennungszeit wird täglich verlängert, bis das Kind sicher und geborgen im Kinderhaus ist. Das Tempo liegt immer beim Kind, nie beim Kalender.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TEAM ── -->
+<section id="team">
+  <div class="reveal">
+    <p class="section-label">Mitarbeiter·innen</p>
+    <h2>Das Team</h2>
+    <p>
+      Sechs qualifizierte Pädagoginnen, eine Küchenleitung und die Geschäftsführung —
+      ergänzt durch Praktikant·innen und eine Reinigungskraft.
+      Stabil, engagiert, langfristig.
+    </p>
+
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="member-initial">N</div>
+        <div class="member-name">Nina Langer</div>
+        <div class="member-role">Leitung · Geschäftsführung</div>
+      </div>
+      <div class="team-member">
+        <div class="member-initial">M</div>
+        <div class="member-name">Manuela</div>
+        <div class="member-role">Spatzen · Bauraum</div>
+      </div>
+      <div class="team-member">
+        <div class="member-initial">B</div>
+        <div class="member-name">Beate</div>
+        <div class="member-role">Spatzen · Atelier</div>
+      </div>
+      <div class="team-member">
+        <div class="member-initial">M</div>
+        <div class="member-name">Michelle</div>
+        <div class="member-role">Spatzen · Bewegungsraum</div>
+      </div>
+      <div class="team-member">
+        <div class="member-initial">I</div>
+        <div class="member-name">Isabelle</div>
+        <div class="member-role">Zwerge · Atelier</div>
+      </div>
+      <div class="team-member">
+        <div class="member-initial">S</div>
+        <div class="member-name">Sophia</div>
+        <div class="member-role">Zwerge · Bauraum</div>
+      </div>
+      <div class="team-member">
+        <div class="member-initial">R</div>
+        <div class="member-name">Ronja</div>
+        <div class="member-role">Zwerge · Bewegungsraum</div>
+      </div>
+      <div class="team-member">
+        <div class="member-initial">A</div>
+        <div class="member-name">Amat</div>
+        <div class="member-role">Koch · Bio-Küche täglich</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GESCHICHTE ── -->
+<section id="geschichte">
+  <div class="reveal">
+    <p class="section-label">Geschichte</p>
+
+    <div class="geschichte-layout">
+      <div>
+        <h2>Seit 1928 stehen Kinder im Mittelpunkt</h2>
+        <p>
+          Das Haus hat eine lange Geschichte — gebaut für Familien,
+          umgewidmet, saniert, und schließlich zum Kinderhaus geworden,
+          das es bis heute ist.
+          Ein Ort mit Gedächtnis und Bestand.
+        </p>
+        <p style="margin-top:1rem;">
+          Unter dem hinteren Garten liegt noch heute ein Bunker aus dem Zweiten Weltkrieg —
+          ein stilles Zeugnis der Zeit, in der dieses Haus für Schutz stand.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">1928</div>
+          <p class="timeline-text">Bau des Doppelhauses in der damals eigenständigen Gemeinde Groß Flottbek. Erstbezug durch Familie Braun und den Lehrer Meier.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1937</div>
+          <p class="timeline-text">Die Straße Osteresch wird Teil von Groß-Hamburg.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1938</div>
+          <p class="timeline-text">Nationalsozialistische Volkswohlfahrt (NSV) richtet ein Kindertagesheim ein. 80–90 Kinder bevölkern Haus und Garten.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1941</div>
+          <p class="timeline-text">Bau eines Luftschutzbunkers im hinteren Garten — von Zwangsarbeitern, vermutlich. Er steht bis heute.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1945</div>
+          <p class="timeline-text">Die Sozialbehörde Hamburg übernimmt. Weiter 80 Kinder täglich, von 6–18 Uhr.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1961</div>
+          <p class="timeline-text">Gründung des Vereins zur Förderung von Kleinkindererziehung in Gruppen e.V. Erster Standort: Osdorfer Landstraße 22.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">1993</div>
+          <p class="timeline-text" style="color: var(--linen);">Am 1. Oktober zieht der Verein in das Doppelhaus Osteresch ein. Seitdem ist dies das Kinderhaus Osteresch.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── KONTAKT ── -->
+<section id="kontakt">
+  <div class="reveal">
+    <p class="section-label">Kontakt &amp; Anmeldung</p>
+    <h2>Melden Sie sich bei uns</h2>
+
+    <div class="kontakt-layout">
+      <div class="kontakt-info">
+        <p>
+          Für eine Anmeldung oder erste Fragen wenden Sie sich direkt an Nina Langer.
+          Gerne vereinbaren wir einen Besichtigungstermin.
+        </p>
+
+        <div class="kontakt-detail">
+          <div class="kontakt-row">
+            <div class="kontakt-row-label">Adresse</div>
+            <div class="kontakt-row-value">Osteresch 20<br>22607 Hamburg<br>Bahrenfeld/Flottbek</div>
+          </div>
+          <div class="kontakt-row">
+            <div class="kontakt-row-label">Telefon</div>
+            <div class="kontakt-row-value"><a href="tel:+494089930035">040 899 30 35</a></div>
+          </div>
+          <div class="kontakt-row">
+            <div class="kontakt-row-label">E-Mail</div>
+            <div class="kontakt-row-value"><a href="mailto:kinderhausosteresch@t-online.de">kinderhausosteresch@<br>t-online.de</a></div>
+          </div>
+          <div class="kontakt-row">
+            <div class="kontakt-row-label">Leitung</div>
+            <div class="kontakt-row-value">Nina Langer</div>
+          </div>
+          <div class="kontakt-row">
+            <div class="kontakt-row-label">Öffnungszeiten</div>
+            <div class="kontakt-row-value">Mo – Fr · 7:45 – 16:30 Uhr</div>
+          </div>
+          <div class="kontakt-row">
+            <div class="kontakt-row-label">Buslinie</div>
+            <div class="kontakt-row-value">Linien 1 und 186 · fußläufig</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <form class="contact-form" action="mailto:kinderhausosteresch@t-online.de" method="post" enctype="text/plain">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input type="text" id="name" name="name" placeholder="Ihr Name" required autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="email">E-Mail *</label>
+              <input type="email" id="email" name="email" placeholder="ihre@email.de" required autocomplete="email">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telefon">Telefon</label>
+              <input type="tel" id="telefon" name="telefon" placeholder="040 ..." autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label for="betreff">Betreff</label>
+              <input type="text" id="betreff" name="betreff" placeholder="Anmeldung / Besichtigung / Frage">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="nachricht">Ihre Nachricht *</label>
+            <textarea id="nachricht" name="nachricht" rows="4" placeholder="Alter und gewünschter Betreuungsbeginn Ihres Kindes, Fragen ..." required></textarea>
+          </div>
+          <div class="form-checkbox">
+            <input type="checkbox" id="datenschutz" name="datenschutz" required>
+            <span>Ich akzeptiere die <a href="https://kinderhaus-osteresch.de/datenschutzerklaerung" target="_blank" rel="noopener">Datenschutzerklärung</a> des Kinderhaus Osteresch und die Speicherung meiner Kontaktdaten.</span>
+          </div>
+          <div>
+            <button type="submit" class="btn-primary" style="border:none;cursor:pointer;">
+              Nachricht senden
+              <svg viewBox="0 0 14 14" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M1 7h12M8 3l5 4-5 4"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-left">
+    © 2024 Kinderhaus Osteresch · Osteresch 20 · 22607 Hamburg
+  </div>
+  <ul class="footer-links">
+    <li><a href="https://kinderhaus-osteresch.de/impressum" target="_blank" rel="noopener">Impressum</a></li>
+    <li><a href="https://kinderhaus-osteresch.de/datenschutzerklaerung" target="_blank" rel="noopener">Datenschutz</a></li>
+    <li><a href="https://kinderhaus-osteresch.de/cookie-richtlinie-eu" target="_blank" rel="noopener">Cookies</a></li>
+  </ul>
+</footer>
+
+<script>
+  // ── BURGER MENU ──
+  const burger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    burger.setAttribute('aria-expanded', navLinks.classList.contains('open'));
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+  reveals.forEach(el => io.observe(el));
+
+  // ── NAV ACTIVE STATE ──
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+  const navObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navAnchors.forEach(a => {
+          a.style.color = a.getAttribute('href') === '#' + id
+            ? 'var(--linen)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => navObs.observe(s));
+</script>
+</body>
+</html>
