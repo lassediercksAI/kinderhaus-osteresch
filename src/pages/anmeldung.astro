@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Anmeldung – Kinderhaus Bahrenfeld/Flottbek" description="">
+<main>
+<section id="anmeldung-prozess" style="background:var(--cream)">
+  <div class="section-inner">
+    <span class="section-label reveal" style="background:#f0fff4;color:var(--teal)">Anmeldung</span>
+    <h2 class="section-title reveal">Prozess der Anmeldung</h2>
+    <p class="reveal" style="max-width:640px;margin:0 auto 2.5rem;text-align:center;color:#555;font-size:1.05rem;">
+      So läuft die Anmeldung bei uns ab — Schritt für Schritt.
+    </p>
+    <div class="reveal" style="max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:1.5rem;">
+      <div style="display:flex;align-items:flex-start;gap:1.2rem;padding:1.5rem;background:var(--white);border-radius:16px;">
+        <div style="min-width:2.5rem;height:2.5rem;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;">1</div>
+        <div>
+          <h3 style="margin:0 0 0.3rem;font-size:1.05rem;">Erstkontakt</h3>
+          <p style="margin:0;color:#555;font-size:0.95rem;">Ruft uns an oder schreibt uns eine E-Mail — wir beantworten alle Fragen gerne.</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:1.2rem;padding:1.5rem;background:var(--white);border-radius:16px;">
+        <div style="min-width:2.5rem;height:2.5rem;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;">2</div>
+        <div>
+          <h3 style="margin:0 0 0.3rem;font-size:1.05rem;">Kennenlerngespräch</h3>
+          <p style="margin:0;color:#555;font-size:0.95rem;">Wir vereinbaren einen Termin, damit ihr das Haus und das Team kennenlernen könnt.</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:1.2rem;padding:1.5rem;background:var(--white);border-radius:16px;">
+        <div style="min-width:2.5rem;height:2.5rem;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;">3</div>
+        <div>
+          <h3 style="margin:0 0 0.3rem;font-size:1.05rem;">Anmeldung &amp; Platzbestätigung</h3>
+          <p style="margin:0;color:#555;font-size:0.95rem;">Nach dem Gespräch erhaltet ihr unsere Anmeldeunterlagen. Bei freiem Platz erfolgt die Bestätigung schriftlich.</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:1.2rem;padding:1.5rem;background:var(--white);border-radius:16px;">
+        <div style="min-width:2.5rem;height:2.5rem;background:var(--pink);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;">4</div>
+        <div>
+          <h3 style="margin:0 0 0.3rem;font-size:1.05rem;">Eingewöhnung</h3>
+          <p style="margin:0;color:#555;font-size:0.95rem;">Gemeinsam planen wir die Eingewöhnung nach dem Berliner Modell — angepasst an euer Kind.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt" style="background:var(--cream)">
+  <div class="section-inner">
+    <span class="section-label reveal" style="background:#f0fff4;color:var(--teal)">Kontakt &amp; Anmeldung</span>
+    <h2 class="section-title reveal">Wir freuen uns auf euch</h2>
+    <div class="reveal" style="text-align:center;margin-bottom:1.5rem;">
+      <a href="/termine.pdf" download style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--teal);color:#fff;padding:0.7rem 1.5rem;border-radius:50px;font-weight:700;text-decoration:none;font-size:0.95rem;">
+        📅 Termine als PDF herunterladen
+      </a>
+    </div>
+    <div class="kontakt-grid">
+      <div class="kontakt-info-blocks">
+        <div class="ki-block ki-1 reveal">
+          <h3>Adresse</h3>
+          <p>Kinderhaus Bahrenfeld/Flottbek<br />[Straße &amp; Hausnummer]<br />[PLZ] Hamburg</p>
+        </div>
+        <div class="ki-block ki-2 reveal">
+          <h3>Kontakt</h3>
+          <p>
+            Telefon: <a href="tel:+4950841234">05084 / 1234</a><br />
+            E-Mail: <a href="mailto:info@kinderhaus-osteresch.de">info@kinderhaus-osteresch.de</a>
+          </p>
+        </div>
+        <div class="ki-block ki-3 reveal">
+          <h3>Öffnungszeiten</h3>
+          <p>Montag – Freitag<br />7:00 – 17:00 Uhr<br /><br />Schließzeiten: 3 Wochen Sommer + 1 Woche Weihnachten</p>
+        </div>
+      </div>
+      <form class="reveal" onsubmit="return false;">
+        <div class="form-group">
+          <label for="name">Name des Kindes</label>
+          <input type="text" id="name" placeholder="Vorname Nachname" />
+        </div>
+        <div class="form-group">
+          <label for="geburt">Geburtsdatum</label>
+          <input type="date" id="geburt" />
+        </div>
+        <div class="form-group">
+          <label for="gruppe">Gewünschte Gruppe</label>
+          <select id="gruppe">
+            <option value="">Bitte wählen…</option>
+            <option>Spatzen (Krippe, 1–3 Jahre)</option>
+            <option>Zwerge (Elementar, 3–6 Jahre)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="eltern">Ihre E-Mail</label>
+          <input type="email" id="eltern" placeholder="eltern@beispiel.de" />
+        </div>
+        <div class="form-group">
+          <label for="nachricht">Nachricht (optional)</label>
+          <textarea id="nachricht" placeholder="Fragen, Wünsche, Besonderheiten…"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Anfrage senden ✨</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+</main>
+</Layout>
