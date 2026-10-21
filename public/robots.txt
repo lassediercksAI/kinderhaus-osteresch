@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /impressum/
+
+Sitemap: https://kinderhaus.cf.exaptation.dev/sitemap-index.xml
